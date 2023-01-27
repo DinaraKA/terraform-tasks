@@ -1,10 +1,10 @@
 resource "aws_launch_template" "my_lt" {
   name_prefix            = "my_lt"
-  image_id               = "ami-1a2b3c"
+  image_id               = "ami-0b5eea76982371e91"
   instance_type          = "t2.micro"
   key_name               = "bastion-key"
   vpc_security_group_ids = [aws_security_group.ssh-sg.id, aws_security_group.http-sg.id]
-  user_data              = var.user_data
+  user_data              = base64encode(var.user_data) 
 }
 resource "aws_autoscaling_group" "my_asg" {
   name                      = "my_asg"

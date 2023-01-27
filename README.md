@@ -1,4 +1,62 @@
 # terraform-tasks
+Terraform Task #1  
+Create below Resources in us-east-1 region: 
+• VPC with 3 public subnets 
+• 1 X Application Load Balancer 
+• 3 X EC2 instances in each subnet, attached to Load Balancer 
+• For all resources, use below tags: 
+Project = VPC_Task 
+Environment = Test 
+Team = DevOps 
+Created_by = Your_Name 
+ 
+ 
+Output 
+IP Addresses of instances 
+DNS name of the Load Balancer 
+ 
+ 
+Note 
+- Other resources, Ex. Key Pairs, Security Groups can also be added/created as needed 
+ 
+- All Resource Settings, not mentioned in task, can be configured at your discretion 
+ 
+- For Testing purposes, you can use User Data to install Apache on instances 
+ 
+ Example: 
+resource "aws_instance" "test" { 
+  ami           = "ami-02eac2c0129f6376b" 
+  instance_type = "t2.micro" 
+  user_data = <<-EOF 
+              #!/bin/bash 
+              yum install httpd -y 
+              service httpd start 
+              chkconfig httpd on 
+              echo "Hello, world" > /var/www/html/index.html 
+              EOF 
+  tags { 
+    Name = "test" 
+  } 
+} 
+ 
+
+Terraform Task #2  
+Create below Resources in us-east-1 region: 
+• VPC with 3 public subnets 
+• 1 X Application Load Balancer 
+• Autoscaling Group with minimum 2 X EC2 instances, attached to Load Balancer 
+• Route53 DNS CNAME record for Application Load Balancer 
+• For all resources, use below tags: 
+Project = VPC_Task 
+Environment = Test 
+Team = DevOps 
+Created_by = Your_Name 
+ 
+ 
+Output 
+DNS name of the Load Balancer 
+Route53 DNS record 
+
 Terraform Task #3  
 Create below Resources in us-east-1 region: 
 • VPC with 3 public subnets 
